@@ -1,11 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Condomínio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="shortcut icon" href="/assests/img/icon.png" />
+
+  <style>
+    @import url(../assests/css/login.css);
+  </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    
+
+  <div class="container">
+    <img src="../assests/img/Logo.svg" alt="Logo" class="logo">
+
+    <p class="subtitle">
+      Gestão inteligente de condomínio
+    </p>
+
+    <div class="login-card">
+      <div class="input-group">
+        <label>E-mail</label>
+
+        <div class="input-box">
+          <i data-lucide="user" class="icon"></i>
+
+          <input
+            type="email"
+            placeholder="Email@email.com"
+          >
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Senha</label>
+
+        <div class="input-box">
+          <i data-lucide="lock" class="icon"></i>
+
+          <input
+            type="password"
+            placeholder="••••••••"
+          >
+        </div>
+      </div>
+
+      <button class="login-btn">
+        → Entrar
+      </button>
+
+      <div class="forgot">
+        <a href="#">
+          Esqueceu sua senha?
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
