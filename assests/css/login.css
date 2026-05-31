@@ -1,121 +1,198 @@
 *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    body{
-      background:#f3f3f5;
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
+body{
+    font-family:
+        "Segoe UI",
+        sans-serif;
+    background:#f5f5f5;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
 
+.container{
+    width:100%;
+    max-width:1200px;
+    display:grid;
+    grid-template-columns:
+        1fr
+        450px;
+
+    gap:60px;
+    align-items:center;
+}
+
+.logo-section{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.logo{
+    width:260px;
+    object-fit:contain;
+}
+
+.company-name{
+    margin-top:20px;
+    color:#5D322B;
+    font-size:38px;
+    font-weight:700;
+}
+
+.company-description{
+    margin-top:12px;
+    color:#6b7280;
+    font-size:18px;
+}
+
+.login-card{
+    background:#fff;
+    border-radius:24px;
+    padding:32px;
+    border:1px solid #ececec;
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.08);
+}
+
+.login-label{
+    text-align:center;
+    color:#6b7280;
+    margin-bottom:16px;
+}
+
+.user-selector{
+    display:flex;
+    background:#f3f4f6;
+    border-radius:14px;
+    padding:4px;
+    margin-bottom:25px;
+}
+
+.selector-btn{
+    flex:1;
+    border:none;
+    background:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    height:48px;
+    border-radius:12px;
+    transition:.3s;
+}
+
+.selector-btn.active{
+    background:#fff;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.08);
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#374151;
+    font-size:14px;
+}
+
+.form-group input{
+    width:100%;
+    height:52px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    padding:0 16px;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+.form-group input:focus{
+    border-color:#5D322B;
+}
+
+.login-btn{
+    width:100%;
+    height:54px;
+    border:none;
+    border-radius:14px;
+    background:#5D322B;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-top:12px;
+    transition:.3s;
+    box-shadow:
+        0 8px 20px rgba(93,50,43,.25);
+}
+
+.login-btn:hover{
+    background:#4c2923;
+}
+
+.forgot-password{
+    display:block;
+    text-align:center;
+    margin-top:24px;
+    color:#6b7280;
+    text-decoration:none;
+}
+
+@media(max-width:900px){
     .container{
-      width:100%;
-      max-width:380px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding:20px;
+        grid-template-columns:1fr;
+        gap:30px;
     }
 
     .logo{
-      width:140px;
-      margin-bottom:12px;
+        width:180px;
     }
 
-    .subtitle{
-      color:#6d7485;
-      font-size:18px;
-      margin-bottom:35px;
-      text-align:center;
+    .company-name{
+        font-size:28px;
+    }
+
+    .company-description{
+        font-size:15px;
     }
 
     .login-card{
-      width:100%;
-      background:#fff;
-      border-radius:28px;
-      padding:35px 28px;
-      box-shadow:
-        0 10px 25px rgba(0,0,0,0.08);
+        width:100%;
+        max-width:450px;
+        margin:auto;
     }
 
-    .input-group{
-      margin-bottom:24px;
+}
+
+@media(max-width:480px){
+
+    body{
+        padding:16px;
     }
 
-    .input-group label{
-      display:block;
-      margin-bottom:10px;
-      color:#4b5563;
-      font-weight:600;
-      font-size:15px;
+    .login-card{
+        padding:24px;
     }
 
-    .input-box{
-      position:relative;
+    .logo{
+        width:140px;
     }
 
-    .input-box input{
-      width:100%;
-      height:58px;
-      border:2px solid #e6e7ec;
-      border-radius:16px;
-      padding-left:48px;
-      outline:none;
-      font-size:15px;
-      background:#f8f8fa;
-      transition:0.3s;
-    }
-
-    .input-box input:focus{
-      border-color:#6d342b;
-      background:#fff;
-    }
-
-    .icon{
-      position:absolute;
-      left:16px;
-      top:50%;
-      transform:translateY(-50%);
-      color:#9ca3af;
-      font-size:18px;
-    }
-
-    .login-btn{
-      width:100%;
-      height:58px;
-      border:none;
-      border-radius:16px;
-      background:#6d342b;
-      color:white;
-      font-size:18px;
-      font-weight:600;
-      cursor:pointer;
-      transition:0.3s;
-      margin-top:10px;
-    }
-
-    .login-btn:hover{
-      background:#5b2a22;
-      transform:translateY(-2px);
-    }
-
-    .forgot{
-      text-align:center;
-      margin-top:28px;
-    }
-
-    .forgot a{
-      text-decoration:none;
-      color:#7c8497;
-      font-weight:600;
-      font-size:14px;
-    }
-
-    .forgot a:hover{
-      color:#6d342b;
-    }
+}

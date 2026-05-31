@@ -1,70 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login Condomínio</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link rel="shortcut icon" href="/assests/img/icon.png" />
-
-  <style>
-    @import url(../assests/css/login.css);
-  </style>
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>LBF Condomínio</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../assests/css/login.css">
 </head>
+
 <body>
 
-  <div class="container">
-    <img src="../assests/img/Logo.svg" alt="Logo" class="logo">
+    <main class="container">
+        <section class="logo-section">
+            <img
+                src="../assests/img/logo.png"
+                alt="LBF Condomínio"
+                class="logo"
+            >
+            <h1 class="company-name">
+                LBF Condomínio
+            </h1>
+            <p class="company-description">
+                Gestão inteligente para síndicos e moradores
+            </p>
+        </section>
 
-    <p class="subtitle">
-      Gestão inteligente de condomínio
-    </p>
+        <section class="login-card">
+            <p class="login-label">
+                Entrar como:
+            </p>
+            <div class="user-selector">
+                <button
+                    class="selector-btn active"
+                    id="btnMorador"
+                >
+                    <i data-lucide="user"></i>
+                    Morador
+                </button>
+                <button
+                    class="selector-btn"
+                    id="btnSindico"
+                >
+                    <i data-lucide="building-2"></i>
+                   Síndico
+                </button>
+            </div>
 
-    <div class="login-card">
-      <div class="input-group">
-        <label>E-mail</label>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input
+                        type="email"
+                        placeholder="seu@email.com"
+                    >
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input
+                        type="password"
+                        placeholder="••••••••"
+                    >
+                </div>
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    <i data-lucide="log-in"></i>
+                    Entrar
+                </button>
+            </form>
+            <a
+                href="#"
+                class="forgot-password"
+            >
+                Esqueceu sua senha?
+            </a>
+        </section>
+    </main>
 
-        <div class="input-box">
-          <i data-lucide="user" class="icon"></i>
+    <script>
+        lucide.createIcons();
+        const btnMorador =
+            document.getElementById("btnMorador");
+        const btnSindico =
+            document.getElementById("btnSindico");
+        btnMorador.addEventListener("click", () => {
+            btnMorador.classList.add("active");
+            btnSindico.classList.remove("active");
+        });
 
-          <input
-            type="email"
-            placeholder="Email@email.com"
-          >
-        </div>
-      </div>
-      <div class="input-group">
-        <label>Senha</label>
+        btnSindico.addEventListener("click", () => {
+            btnSindico.classList.add("active");
+            btnMorador.classList.remove("active");
+        });
+    </script>
 
-        <div class="input-box">
-          <i data-lucide="lock" class="icon"></i>
-
-          <input
-            type="password"
-            placeholder="••••••••"
-          >
-        </div>
-      </div>
-
-      <button class="login-btn">
-        → Entrar
-      </button>
-
-      <div class="forgot">
-        <a href="#">
-          Esqueceu sua senha?
-        </a>
-      </div>
-
-    </div>
-
-  </div>
-
-  <script>
-    lucide.createIcons();
-  </script>
 </body>
 </html>
