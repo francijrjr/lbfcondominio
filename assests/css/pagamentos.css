@@ -27,6 +27,13 @@ body {
   overflow: hidden;
 }
 
+#app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
 /* === MENU LATERAL (DESKTOP) === */
 .sidebar {
   width: 288px;
@@ -38,11 +45,13 @@ body {
 }
 
 .sidebar-header {
-  padding: 24px;
+  height: 104px;
+  padding: 0 24px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
 }
 
 .sidebar-header img {
@@ -116,7 +125,12 @@ body {
 .topbar {
   background-color: #ffffff;
   border-bottom: 1px solid var(--border-color);
-  padding: 24px 32px;
+  height: 104px;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .topbar h2 {
@@ -316,11 +330,28 @@ body {
   color: var(--success-text);
 }
 
+.btn-download-boleto {
+  border: none;
+  background: transparent;
+  color: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-download-boleto:hover {
+  text-decoration: underline;
+}
+
 /* =========================================
    MODO RESPONSIVO (TELAS MOBILE) 
    ========================================= */
 @media (max-width: 768px) {
   body {
+    flex-direction: column;
+  }
+
+  #app {
     flex-direction: column;
   }
 

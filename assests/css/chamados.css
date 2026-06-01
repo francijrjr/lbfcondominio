@@ -28,6 +28,13 @@ body {
   overflow: hidden;
 }
 
+#app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
 /* === MENU LATERAL (SIDEBAR) === */
 .sidebar {
   width: 288px;
@@ -39,11 +46,13 @@ body {
 }
 
 .sidebar-header {
-  padding: 24px;
+  height: 104px;
+  padding: 0 24px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
 }
 
 .sidebar-header img {
@@ -128,7 +137,12 @@ body {
 .topbar {
   background-color: #ffffff;
   border-bottom: 1px solid var(--border-color);
-  padding: 24px 32px;
+  height: 104px;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .topbar h2 {
@@ -406,9 +420,74 @@ body {
   color: var(--primary-dark);
 }
 
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1200;
+  min-width: 280px;
+  max-width: calc(100vw - 32px);
+  background: #ffffff;
+  border: 1px solid #dcfce7;
+  border-left: 4px solid #16a34a;
+  border-radius: 14px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #dcfce7;
+  color: #15803d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toast-icon i {
+  width: 16px;
+  height: 16px;
+}
+
+.toast strong {
+  display: block;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.toast p {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
 /* ========== RESPONSIVIDADE MOBILE ========== */
 @media (max-width: 768px) {
   body {
+    flex-direction: column;
+  }
+
+  #app {
     flex-direction: column;
   }
 
@@ -431,5 +510,12 @@ body {
 
   .ticket-card {
     padding: 16px;
+  }
+
+  .toast {
+    right: 16px;
+    bottom: 88px;
+    left: 16px;
+    min-width: 0;
   }
 }

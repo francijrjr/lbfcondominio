@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lbf condomínio - Pagamentos</title>
+    <title>LBF Condominio - Pagamentos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -11,160 +11,15 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="../assests/css/pagamentos.css">
+    <link rel="stylesheet" href="../assests/css/pagamentos.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
-    <header class="mobile-header">
-      <div class="mh-left">
-        <img src="../assests/img/logo.png" alt="Logo LBF" />
-        <div class="mh-user-info">
-          <h2>Breno Lui</h2>
-          <p>Apartamento 10</p>
-        </div>
-      </div>
-      <a href="../assests/img/logo.png" class="mh-logout">
-        <i data-lucide="log-out"></i>
-        <span>Sair</span>
-      </a>
-    </header>
+    <div id="app"></div>
 
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <img src="../assests/img/logo.png" alt="Logo CondoApp" />
-        <div class="brand-info">
-          <h1>Alisson</h1>
-          <span>Área do Morador</span>
-        </div>
-      </div>
-
-      <nav class="sidebar-nav">
-        <a href="#" class="nav-item active">
-          <i data-lucide="file-text"></i>
-          Pagamentos
-        </a>
-        <a href="chamados.html" class="nav-item">
-          <i data-lucide="message-square"></i>
-          Chamados
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <a href="login.html" class="nav-item">
-          <i data-lucide="log-out"></i>
-          Sair
-        </a>
-      </div>
-    </aside>
-
-    <main class="main-wrapper">
-      <header class="topbar">
-        <h2>Pagamentos</h2>
-        <p>Gerencie seus pagamentos de condomínio</p>
-      </header>
-
-      <section class="content-area">
-        <div class="alert-card">
-          <div class="alert-header">
-            <div class="alert-icon">
-              <i data-lucide="alert-triangle"></i>
-            </div>
-            <div class="alert-title">
-              <h3>Pagamento Pendente</h3>
-              <p>Vencimento: 05/05/2026</p>
-            </div>
-          </div>
-
-          <div class="alert-value">
-            <span class="amount">R$ 850.00</span>
-            <span class="month">Abril 2026</span>
-          </div>
-
-          <button class="btn-pay">Pagar Condomínio</button>
-        </div>
-
-        <h3 class="history-section-title">
-          <i data-lucide="clock-3"></i>
-          Histórico de Pagamentos
-        </h3>
-
-        <div class="history-list">
-          <div class="history-card">
-            <div class="history-card-left">
-              <div class="icon-box pending">
-                <i data-lucide="file-text"></i>
-              </div>
-              <div class="history-info">
-                <h4>Abril 2026</h4>
-                <p>Vence em 05/05/2026</p>
-              </div>
-            </div>
-            <div class="history-card-right">
-              <span class="history-amount">R$ 850.00</span>
-              <span class="badge pending">Pendente</span>
-            </div>
-          </div>
-
-          <div class="history-card">
-            <div class="history-card-left">
-              <div class="icon-box paid">
-                <i data-lucide="check"></i>
-              </div>
-              <div class="history-info">
-                <h4>Março 2026</h4>
-                <p>Pago em 03/04/2026</p>
-              </div>
-            </div>
-            <div class="history-card-right">
-              <span class="history-amount">R$ 850.00</span>
-              <span class="badge paid">Pago</span>
-            </div>
-          </div>
-
-          <div class="history-card">
-            <div class="history-card-left">
-              <div class="icon-box paid">
-                <i data-lucide="check"></i>
-              </div>
-              <div class="history-info">
-                <h4>Fevereiro 2026</h4>
-                <p>Pago em 02/03/2026</p>
-              </div>
-            </div>
-            <div class="history-card-right">
-              <span class="history-amount">R$ 850.00</span>
-              <span class="badge paid">Pago</span>
-            </div>
-          </div>
-
-          <div class="history-card">
-            <div class="history-card-left">
-              <div class="icon-box paid">
-                <i data-lucide="check"></i>
-              </div>
-              <div class="history-info">
-                <h4>Janeiro 2026</h4>
-                <p>Pago em 04/02/2026</p>
-              </div>
-            </div>
-            <div class="history-card-right">
-              <span class="history-amount">R$ 850.00</span>
-              <span class="badge paid">Pago</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <nav class="mobile-bottom-nav">
-      <a href="#" class="mbn-item active">
-        <i data-lucide="file-text"></i>
-        <span>Pagamentos</span>
-      </a>
-      <a href="chamados.html" class="mbn-item">
-        <i data-lucide="message-square"></i>
-        <span>Chamados</span>
-      </a>
-    </nav>
+    <script
+      type="module"
+      src="../assests/js/modules/pagamento/pagamentos.controller.js"
+    ></script>
   </body>
 </html>

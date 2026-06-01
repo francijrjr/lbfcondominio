@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CondoApp - Chamados</title>
+    <title>LBF condomínio - Chamados</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -11,175 +11,15 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="../assests/css/chamados.css">
+    <link rel="stylesheet" href="../assests/css/chamados.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
-    <header class="mobile-header">
-      <div class="mh-left">
-        <img src="../assests/img/logo.png" alt="Logo LBF" />
-        <div class="mh-user-info">
-          <h2>Alisson</h2>
-          <p>Apartamento 10</p>
-        </div>
-      </div>
-      <a href="../assests/img/logo.png" class="mh-logout">
-        <i data-lucide="log-out"></i>
-        <span>Sair</span>
-      </a>
-    </header>
+    <div id="app"></div>
 
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <img src="../assests/img/logo.png" alt="Logo CondoApp" />
-        <div class="brand-info">
-          <h1>Alisson</h1>
-          <span>Área do Morador</span>
-        </div>
-      </div>
-
-      <nav class="sidebar-nav">
-        <a href="pagamentos.html" class="nav-item">
-          <i data-lucide="file-text"></i>
-          Pagamentos
-        </a>
-        <a href="#" class="nav-item active">
-          <i data-lucide="message-square"></i>
-          Chamados
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <a href="login.html" class="nav-item">
-          <i data-lucide="log-out"></i>
-          Sair
-        </a>
-      </div>
-    </aside>
-
-    <main class="main-wrapper">
-      <header class="topbar">
-        <h2>Chamados</h2>
-        <p>Abra e acompanhe seus chamados</p>
-      </header>
-
-      <section class="content-area">
-        <button class="btn-new-ticket" onclick="toggleForm(true)">
-          <i data-lucide="plus"></i>
-          Novo Chamado
-        </button>
-
-        <div class="form-card" id="formNovoChamado">
-          <h3>Criar Chamado</h3>
-          <form onsubmit="submitForm(event)">
-            <div class="form-group">
-              <label for="titulo">Título</label>
-              <input
-                type="text"
-                id="titulo"
-                class="form-input"
-                placeholder="Ex: Vazamento no apartamento"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="descricao">Descrição</label>
-              <textarea
-                id="descricao"
-                class="form-textarea"
-                placeholder="Descreva o problema..."
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn-submit">Enviar</button>
-              <button
-                type="button"
-                class="btn-cancel"
-                onclick="toggleForm(false)"
-              >
-                Cancelar
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <h3 class="section-title">
-          <i data-lucide="message-square"></i>
-          Meus Chamados
-        </h3>
-
-        <div class="tickets-list">
-          <div class="ticket-card">
-            <div class="ticket-header">
-              <div class="ticket-icon">
-                <i data-lucide="message-square"></i>
-              </div>
-              <div class="ticket-info">
-                <h3>Vazamento no banheiro</h3>
-                <p>Há um vazamento no encanamento do banheiro principal</p>
-                <span>25/04/2026</span>
-              </div>
-            </div>
-            <div class="ticket-footer">
-              <span class="badge-status">Aberto</span>
-            </div>
-          </div>
-
-          <div class="ticket-card">
-            <div class="ticket-header">
-              <div class="ticket-icon">
-                <i data-lucide="message-square"></i>
-              </div>
-              <div class="ticket-info">
-                <h3>Luz do corredor queimada</h3>
-                <p>A lâmpada do corredor do 3º andar está queimada</p>
-                <span>20/04/2026</span>
-              </div>
-            </div>
-            <div class="ticket-footer">
-              <span class="badge-status">Aberto</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <nav class="mobile-bottom-nav">
-      <a href="pagamentos.html" class="mbn-item">
-        <i data-lucide="file-text"></i>
-        <span>Pagamentos</span>
-      </a>
-      <a href="#" class="mbn-item active">
-        <i data-lucide="message-square"></i>
-        <span>Chamados</span>
-      </a>
-    </nav>
-
-    <script>
-      const formContainer = document.getElementById("formNovoChamado");
-      const btnNewTicket = document.querySelector(".btn-new-ticket");
-
-      function toggleForm(show) {
-        if (show) {
-          formContainer.style.display = "block";
-          btnNewTicket.style.display = "none"; 
-        } else {
-          formContainer.style.display = "none";
-          btnNewTicket.style.display = "flex";
-          document.querySelector("form").reset(); 
-        }
-      }
-
-      function submitForm(event) {
-        event.preventDefault();
-
-        const titulo = document.getElementById("titulo").value;
-        alert(`Sucesso!\nChamado "${titulo}" foi aberto e enviado ao síndico.`);
-        toggleForm(false);
-      }
-    </script>
+    <script
+      type="module"
+      src="../assests/js/modules/chamado/chamados.controller.js"
+    ></script>
   </body>
 </html>
