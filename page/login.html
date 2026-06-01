@@ -1,123 +1,114 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - LBF Condomínio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <title>LBF Condomínio</title>
+    <link rel="stylesheet" href="../assests/css/login.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="../assests/css/login.css">
-</head>
 
-<body>
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo-section">
+        <img src="../assests/img/logo.png" alt="LBF Condomínio" />
+        <p class="logo-subtitle">Gestão inteligente de condomínio</p>
+      </div>
 
-    <main class="container">
-        <section class="logo-section">
-            <img
-                src="../assests/img/logo.png"
-                alt="LBF Condomínio"
-                class="logo"
-            >
-            <h1 class="company-name">
-                LBF Condomínio
-            </h1>
-            <p class="company-description">
-                Gestão inteligente para síndicos e moradores
-            </p>
-        </section>
+      <div class="login-card">
+        <p class="card-title">Entrar como:</p>
 
-        <section class="login-card">
-            <p class="login-label">
-                Entrar como:
-            </p>
-            <div class="user-selector">
-                <button
-                    class="selector-btn active"
-                    id="btnMorador"
-                >
-                    <i data-lucide="user"></i>
-                    Morador
-                </button>
-                <button
-                    class="selector-btn"
-                    id="btnSindico"
-                >
-                    <i data-lucide="building-2"></i>
-                   Síndico
-                </button>
+        <div class="toggle-container">
+          <button
+            type="button"
+            class="toggle-btn active"
+            onclick="selectRole(this, 'morador')"
+          >
+            <i data-lucide="user"></i>
+            Morador
+          </button>
+          <button
+            type="button"
+            class="toggle-btn"
+            onclick="selectRole(this, 'sindico')"
+          >
+            <i data-lucide="building-2"></i>
+            Síndico
+          </button>
+        </div>
+
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="email-field">E-mail</label>
+            <div class="input-wrapper">
+              <span class="icon">
+                <i data-lucide="mail"></i>
+              </span>
+              <input
+                type="email"
+                id="email-field"
+                class="input-field"
+                placeholder="seu@email.com"
+                required
+              />
             </div>
+          </div>
 
-            <form id="loginForm">
-                <input type="hidden" id="userType" value="morador">
-                <div class="form-group">
-                    <label>E-mail</label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="seu@email.com"
-                        required
-                    >
-                </div>
-                <div class="form-group">
-                    <label>Senha</label>
-                    <input
-                        type="password"
-                        id="senha"
-                        placeholder="••••••••"
-                        required
-                    >
-                </div>
-                <button
-                    type="submit"
-                    class="login-btn"
-                >
-                    <i data-lucide="log-in"></i>
-                    Entrar
-                </button>
-            </form>
-            <a
-                href="#"
-                class="forgot-password"
-            >
-                Esqueceu sua senha?
-            </a>
-        </section>
-    </main>
+          <div class="form-group">
+            <label for="password-field">Senha</label>
+            <div class="input-wrapper">
+              <span class="icon">
+                <i data-lucide="lock"></i>
+              </span>
+              <input
+                type="password"
+                id="password-field"
+                class="input-field"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i data-lucide="log-in"></i>
+            Entrar
+          </button>
+        </form>
+
+        <div class="forgot-password">
+          <a href="#">Esqueceu sua senha?</a>
+        </div>
+      </div>
+    </div>
 
     <script>
-        lucide.createIcons();
-        const btnMorador = document.getElementById("btnMorador");
-        const btnSindico = document.getElementById("btnSindico");
-        const loginForm = document.getElementById("loginForm");
-        const userTypeInput = document.getElementById("userType");
+      let currentRole = "morador";
 
-        btnMorador.addEventListener("click", () => {
-            btnMorador.classList.add("active");
-            btnSindico.classList.remove("active");
-            userTypeInput.value = "morador";
-        });
+      function selectRole(button, role) {
+        document
+          .querySelectorAll(".toggle-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+        currentRole = role;
+      }
 
-        btnSindico.addEventListener("click", () => {
-            btnSindico.classList.add("active");
-            btnMorador.classList.remove("active");
-            userTypeInput.value = "sindico";
-        });
-
-        // Redirecionar baseado no tipo de usuário
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const userType = userTypeInput.value;
-            
-            if (userType === "morador") {
-                window.location.href = "./pagamento.html";
-            } else if (userType === "sindico") {
-                window.location.href = "./dashboard.html";
-            }
-        });
+      function handleSubmit(event) {
+        event.preventDefault();
+        if (currentRole === "morador") {
+          window.location.href = "pagamentos.html";
+        } else if (currentRole === "sindico") {
+          window.location.href = "sin_financeiro.html";
+        }
+      }
     </script>
-
-</body>
+  </body>
 </html>
