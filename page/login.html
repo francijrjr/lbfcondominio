@@ -51,18 +51,23 @@
             </div>
 
             <form id="loginForm">
+                <input type="hidden" id="userType" value="morador">
                 <div class="form-group">
                     <label>E-mail</label>
                     <input
                         type="email"
+                        id="email"
                         placeholder="seu@email.com"
+                        required
                     >
                 </div>
                 <div class="form-group">
                     <label>Senha</label>
                     <input
                         type="password"
+                        id="senha"
                         placeholder="••••••••"
+                        required
                     >
                 </div>
                 <button
@@ -84,18 +89,33 @@
 
     <script>
         lucide.createIcons();
-        const btnMorador =
-            document.getElementById("btnMorador");
-        const btnSindico =
-            document.getElementById("btnSindico");
+        const btnMorador = document.getElementById("btnMorador");
+        const btnSindico = document.getElementById("btnSindico");
+        const loginForm = document.getElementById("loginForm");
+        const userTypeInput = document.getElementById("userType");
+
         btnMorador.addEventListener("click", () => {
             btnMorador.classList.add("active");
             btnSindico.classList.remove("active");
+            userTypeInput.value = "morador";
         });
 
         btnSindico.addEventListener("click", () => {
             btnSindico.classList.add("active");
             btnMorador.classList.remove("active");
+            userTypeInput.value = "sindico";
+        });
+
+        // Redirecionar baseado no tipo de usuário
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const userType = userTypeInput.value;
+            
+            if (userType === "morador") {
+                window.location.href = "./pagamento.html";
+            } else if (userType === "sindico") {
+                window.location.href = "./dashboard.html";
+            }
         });
     </script>
 

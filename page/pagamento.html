@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamentos</title>
+
+    <link rel="stylesheet" href="../assests/css/Mpagamento.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <img
+                src="../assests/img/logo.png"
+                alt="Logo"
+                class="logo"
+            >
+
+            <div>
+
+                <h2>CondoApp</h2>
+
+                <span>Área do Morador</span>
+
+            </div>
+
+        </div>
+
+        <nav class="menu">
+
+            <a href="#" class="menu-item active">
+
+                <i data-lucide="credit-card"></i>
+
+                Pagamentos
+
+            </a>
+
+            <a href="#" class="menu-item">
+
+                <i data-lucide="message-square"></i>
+
+                Chamados
+
+            </a>
+
+        </nav>
+
+        <button class="logout-btn">
+
+            <i data-lucide="log-out"></i>
+
+            Sair
+
+        </button>
+
+    </aside>
+
+    <main class="content">
+        <header class="page-header">
+            <h1>Pagamentos</h1>
+            <p>
+                Gerencie seus pagamentos do condomínio
+            </p>
+
+        </header>
+
+        <section class="pending-card">
+
+            <div class="pending-title">
+
+                <i data-lucide="credit-card"></i>
+
+                <span>
+                    Pagamento Pendente
+                </span>
+
+            </div>
+
+            <small>
+                Vencimento: 05/05/2026
+            </small>
+
+            <h2>
+                R$ 850.00
+                <span>Abril 2026</span>
+            </h2>
+
+            <button class="pay-btn">
+
+                Pagar Condomínio
+
+            </button>
+
+        </section>
+
+        <!-- HISTÓRICO -->
+
+        <section class="history">
+
+            <h3>
+
+                <i data-lucide="clock-3"></i>
+
+                Histórico de Pagamentos
+
+            </h3>
+
+            <div class="payment-item">
+
+                <div class="payment-left">
+
+                    <div class="status-icon pending">
+
+                        <i data-lucide="credit-card"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Abril 2026
+                        </strong>
+
+                        <small>
+                            Vence em 05/05/2026
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="payment-right">
+
+                    <strong>
+                        R$ 850.00
+                    </strong>
+
+                    <span class="status-pending">
+                        Pendente
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="payment-item">
+
+                <div class="payment-left">
+
+                    <div class="status-icon paid">
+
+                        <i data-lucide="check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Março 2026
+                        </strong>
+
+                        <small>
+                            Pago em 03/04/2026
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="payment-right">
+
+                    <strong>
+                        R$ 850.00
+                    </strong>
+
+                    <span class="status-paid">
+                        Pago
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="payment-item">
+
+                <div class="payment-left">
+
+                    <div class="status-icon paid">
+
+                        <i data-lucide="check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Fevereiro 2026
+                        </strong>
+
+                        <small>
+                            Pago em 02/03/2026
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="payment-right">
+
+                    <strong>
+                        R$ 850.00
+                    </strong>
+
+                    <span class="status-paid">
+                        Pago
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
