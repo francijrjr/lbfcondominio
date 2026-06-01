@@ -63,6 +63,38 @@ export const MockData = {
         }
     ],
 
+    notificacoes: [],
+
+    usuarios: [
+        {
+            id: "user-sindico-001",
+            nome: "Francis",
+            email: "francis@admin.com",
+            senha: "admin@123",
+            role: "sindico",
+            apartamento: null,
+            ativo: true
+        },
+        {
+            id: "user-morador-001",
+            nome: "Breno Lui",
+            email: "breno@email.com",
+            senha: "123456",
+            role: "morador",
+            apartamento: "10",
+            ativo: true
+        },
+        {
+            id: "user-morador-002",
+            nome: "Lui Richard",
+            email: "maria@email.com",
+            senha: "123456",
+            role: "morador",
+            apartamento: "102",
+            ativo: true
+        }
+    ],
+
     pagamentos: [
         {
             id: "pag-2026-04",

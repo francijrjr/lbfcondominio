@@ -561,6 +561,22 @@ body {
   margin-bottom: 8px;
 }
 
+.select-notify {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #bedbff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.select-notify:focus {
+  border-color: #2b7fff;
+}
+
 .input-group {
   display: flex;
   gap: 8px;
@@ -646,6 +662,67 @@ body {
 .btn-resolve {
   background: var(--primary-dark);
   color: #ffffff;
+}
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1300;
+  min-width: 300px;
+  max-width: calc(100vw - 32px);
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-left: 4px solid #2b7fff;
+  border-radius: 14px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #dbeafe;
+  color: #1447e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toast-icon i {
+  width: 16px;
+  height: 16px;
+}
+
+.toast strong {
+  display: block;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.toast p {
+  color: var(--text-secondary);
+  font-size: 13px;
 }
 
 /* =========================================
@@ -790,5 +867,12 @@ body {
   .btn-send {
     padding: 12px;
     justify-content: center;
+  }
+
+  .toast {
+    right: 16px;
+    bottom: 88px;
+    left: 16px;
+    min-width: 0;
   }
 }

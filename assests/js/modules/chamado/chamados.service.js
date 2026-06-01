@@ -2,6 +2,7 @@ import { MockData } from "../../data/mock-data.js";
 import { Chamado } from "./chamados.model.js";
 
 const STORAGE_KEY = "lbfcondominio.chamados";
+const NOTIFICACOES_STORAGE_KEY = "lbfcondominio.notificacoes";
 
 export class ChamadosService {
     listar() {
@@ -81,6 +82,58 @@ export class ChamadosService {
             );
 
         this.salvarStorage(chamados);
+    }
+
+    notificarMorador(chamadoId, tipo, mensagem) {
+        const chamado =
+            this.obterPorId(chamadoId);
+
+        if (!chamado) {
+            throw new Error("Chamado nao encontrado.");
+        }
+
+        const notificacao = {
+            id: `not-${Date.now()}`,
+            chamadoId,
+            tipo,
+            mensagem: mensagem.trim(),
+            dataEnvio: this.formatarData(new Date()),
+            morador: chamado.morador,
+            lida: false
+        };
+
+        const notificacoes = [
+            notificacao,
+            ...this.lerNotificacoes()
+        ];
+
+        this.salvarNotificacoes(notificacoes);
+
+        return notificacao;
+    }
+
+    lerNotificacoes() {
+        const dados =
+            localStorage.getItem(NOTIFICACOES_STORAGE_KEY);
+
+        if (!dados) {
+            this.salvarNotificacoes(MockData.notificacoes);
+            return MockData.notificacoes;
+        }
+
+        try {
+            return JSON.parse(dados);
+        } catch {
+            this.salvarNotificacoes(MockData.notificacoes);
+            return MockData.notificacoes;
+        }
+    }
+
+    salvarNotificacoes(notificacoes) {
+        localStorage.setItem(
+            NOTIFICACOES_STORAGE_KEY,
+            JSON.stringify(notificacoes)
+        );
     }
 
     obterUsuarioLogado() {

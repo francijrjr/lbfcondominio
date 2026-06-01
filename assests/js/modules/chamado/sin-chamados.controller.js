@@ -39,6 +39,9 @@ class SindicoChamadosController {
                 const resolver =
                     event.target.closest("[data-resolve-ticket]");
 
+                const enviarNotificacao =
+                    event.target.closest("[data-send-notification]");
+
                 if (card) {
                     this.chamadoSelecionadoId =
                         card.dataset.openTicket;
@@ -56,6 +59,12 @@ class SindicoChamadosController {
                     );
                     this.chamadoSelecionadoId = null;
                     this.renderizar();
+                }
+
+                if (enviarNotificacao) {
+                    this.enviarNotificacao(
+                        enviarNotificacao.dataset.sendNotification
+                    );
                 }
             }
         );
@@ -79,6 +88,48 @@ class SindicoChamadosController {
             "storage",
             () => this.renderizar()
         );
+    }
+
+    enviarNotificacao(chamadoId) {
+        const input =
+            document.getElementById("mensagemInput");
+
+        const tipo =
+            document.getElementById("tipoNotificacao").value;
+
+        this.service.notificarMorador(
+            chamadoId,
+            tipo,
+            input.value
+        );
+
+        input.value = "";
+        document.getElementById("btnEnviarMsg").disabled = true;
+
+        this.showToast(
+            tipo === "inadimplencia"
+                ? "Notificacao de inadimplencia enviada ao morador."
+                : "Notificacao do chamado enviada ao morador."
+        );
+    }
+
+    showToast(message) {
+        const toast =
+            document.getElementById("toast");
+
+        const toastMessage =
+            document.getElementById("toastMessage");
+
+        toastMessage.textContent = message;
+        toast.classList.add("show");
+
+        clearTimeout(this.toastTimeout);
+
+        this.toastTimeout =
+            setTimeout(
+                () => toast.classList.remove("show"),
+                3000
+            );
     }
 }
 

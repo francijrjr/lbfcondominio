@@ -40,6 +40,7 @@ export class SindicoChamadosView {
 
             ${this.renderMobileBottomNav()}
             ${this.renderModal(chamadoSelecionado)}
+            ${this.renderToast()}
         `;
     }
 
@@ -80,6 +81,10 @@ export class SindicoChamadosView {
                     <a href="#" class="nav-item active">
                         <i data-lucide="message-square"></i>
                         <span>Chamados</span>
+                    </a>
+                    <a href="sin_usuarios.html" class="nav-item">
+                        <i data-lucide="users"></i>
+                        <span>Usuarios</span>
                     </a>
                 </nav>
 
@@ -183,7 +188,13 @@ export class SindicoChamadosView {
                                     class="input-notify"
                                     placeholder="Digite sua mensagem..."
                                 />
-                                <button class="btn-send" id="btnEnviarMsg" type="button" disabled>
+                                <button
+                                    class="btn-send"
+                                    id="btnEnviarMsg"
+                                    type="button"
+                                    data-send-notification="${chamado.id}"
+                                    disabled
+                                >
                                     <i data-lucide="file-text"></i>
                                     Enviar
                                 </button>
@@ -220,7 +231,25 @@ export class SindicoChamadosView {
                     <i data-lucide="message-square"></i>
                     <span>Chamados</span>
                 </a>
+                <a href="sin_usuarios.html" class="mbn-item">
+                    <i data-lucide="users"></i>
+                    <span>Usuarios</span>
+                </a>
             </nav>
+        `;
+    }
+
+    renderToast() {
+        return `
+            <div class="toast" id="toast" role="status" aria-live="polite">
+                <div class="toast-icon">
+                    <i data-lucide="check-circle"></i>
+                </div>
+                <div>
+                    <strong>Notificacao enviada</strong>
+                    <p id="toastMessage">O morador foi notificado.</p>
+                </div>
+            </div>
         `;
     }
 
