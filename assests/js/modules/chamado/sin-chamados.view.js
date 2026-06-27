@@ -68,7 +68,7 @@ export class SindicoChamadosView {
                 <div class="sidebar-header">
                     <img src="../assests/img/logo.png" alt="Logo CondoApp" />
                     <div class="brand-info">
-                        <h1>Lui</h1>
+                        <h1>Francis</h1>
                         <span>Area do Sindico</span>
                     </div>
                 </div>
