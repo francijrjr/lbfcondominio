@@ -1,0 +1,56 @@
+name: Validate Pull Request
+
+on:
+  pull_request_target:
+    types: [opened, reopened, edited, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  conventional-title:
+    name: Conventional PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate title
+        uses: amannn/action-semantic-pull-request@v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          validateSingleCommit: true
+          validateSingleCommitMatchesPrTitle: true
+
+  git-flow:
+    name: Git Flow policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate source and target branches
+        env:
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+        shell: bash
+        run: |
+          if [[ "$BASE_BRANCH" == "develop" && "$HEAD_BRANCH" =~ ^feature/.+$ ]]; then
+            exit 0
+          fi
+
+          if [[ "$BASE_BRANCH" == "main" && "$HEAD_BRANCH" =~ ^(develop|release/.+|hotfix/.+)$ ]]; then
+            exit 0
+          fi
+
+          echo "Fluxo inválido: '$HEAD_BRANCH' não pode abrir Pull Request para '$BASE_BRANCH'."
+          echo "Use feature/* -> develop; develop, release/* ou hotfix/* -> main."
+          exit 1
