@@ -1,0 +1,16 @@
+{
+  "name": "lbf-condominio",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.16.1",
+  "scripts": {
+    "dev": "pnpm --parallel --filter ./api --filter ./client dev",
+    "build": "pnpm --filter ./api build && pnpm --filter ./client build",
+    "lint": "pnpm --filter ./api lint && pnpm --filter ./client lint",
+    "typecheck": "pnpm --filter ./api typecheck && pnpm --filter ./client typecheck",
+    "db:generate": "pnpm --filter ./api db:generate",
+    "db:migrate": "pnpm --filter ./api db:migrate",
+    "db:migrate:dev": "pnpm --filter ./api db:migrate:dev",
+    "db:seed": "pnpm --filter ./api db:seed"
+  }
+}

@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+model Pessoa {
+  id           String   @id @default(uuid()) @db.UniqueIdentifier
+  nome         String   @db.NVarChar(160)
+  cpf          String   @unique @db.VarChar(11)
+  email        String   @unique @db.NVarChar(255)
+  telefone     String?  @db.VarChar(20)
+  senhaHash    String   @db.VarChar(255)
+  ativo        Boolean  @default(true)
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+  sindico      Sindico?
+  morador      Morador?
+
+  @@map("pessoas")
+}
+
+model Sindico {
+  pessoaId     String    @id @db.UniqueIdentifier
+  inicioMandato DateTime
+  fimMandato    DateTime?
+  pessoa        Pessoa   @relation(fields: [pessoaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("sindicos")
+}
+
+model Apartamento {
+  id        String     @id @default(uuid()) @db.UniqueIdentifier
+  numero    String     @db.NVarChar(20)
+  bloco     String     @default("") @db.NVarChar(40)
+  status    String     @default("ATIVO") @db.VarChar(20)
+  moradores Morador[]
+  cobrancas Cobranca[]
+  chamados  Chamado[]
+
+  @@unique([bloco, numero])
+  @@map("apartamentos")
+}
+
+model Morador {
+  pessoaId             String       @id @db.UniqueIdentifier
+  apartamentoId        String       @db.UniqueIdentifier
+  responsavelFinanceiro Boolean     @default(false)
+  pessoa               Pessoa       @relation(fields: [pessoaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  apartamento          Apartamento  @relation(fields: [apartamentoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  chamados             Chamado[]
+
+  @@index([apartamentoId])
+  @@map("moradores")
+}
+
+model Cobranca {
+  id            String       @id @default(uuid()) @db.UniqueIdentifier
+  apartamentoId String       @db.UniqueIdentifier
+  competencia   DateTime     @db.Date
+  valor         Decimal      @db.Decimal(12, 2)
+  vencimento    DateTime     @db.Date
+  status        String       @default("PENDENTE") @db.VarChar(20)
+  criadaEm      DateTime     @default(now())
+  apartamento   Apartamento  @relation(fields: [apartamentoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  boleto        Boleto?
+  pagamento     Pagamento?
+
+  @@unique([apartamentoId, competencia])
+  @@index([status, vencimento])
+  @@map("cobrancas")
+}
+
+model Boleto {
+  id             String   @id @default(uuid()) @db.UniqueIdentifier
+  cobrancaId     String   @unique @db.UniqueIdentifier
+  linhaDigitavel String   @unique @db.VarChar(80)
+  codigoBarras   String   @unique @db.VarChar(80)
+  urlDocumento   String?  @db.NVarChar(1000)
+  emitidoEm      DateTime @default(now())
+  cobranca       Cobranca @relation(fields: [cobrancaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("boletos")
+}
+
+model Pagamento {
+  id             String      @id @default(uuid()) @db.UniqueIdentifier
+  cobrancaId     String      @unique @db.UniqueIdentifier
+  valorPago      Decimal     @db.Decimal(12, 2)
+  pagoEm         DateTime
+  formaPagamento String      @db.VarChar(30)
+  comprovante    String?     @db.NVarChar(1000)
+  cobranca       Cobranca    @relation(fields: [cobrancaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  transacoes     Transacao[]
+
+  @@map("pagamentos")
+}
+
+model Chamado {
+  id            String       @id @default(uuid()) @db.UniqueIdentifier
+  moradorId     String       @db.UniqueIdentifier
+  apartamentoId String?      @db.UniqueIdentifier
+  titulo        String       @db.NVarChar(160)
+  descricao     String       @db.NVarChar(Max)
+  categoria     String       @db.VarChar(50)
+  status        String       @default("ABERTO") @db.VarChar(30)
+  abertoEm      DateTime     @default(now())
+  atualizadoEm  DateTime     @updatedAt
+  morador       Morador      @relation(fields: [moradorId], references: [pessoaId], onDelete: NoAction, onUpdate: NoAction)
+  apartamento   Apartamento? @relation(fields: [apartamentoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  manutencao    Manutencao?
+
+  @@index([moradorId])
+  @@index([status, abertoEm])
+  @@map("chamados")
+}
+
+model Manutencao {
+  id               String   @id @default(uuid()) @db.UniqueIdentifier
+  chamadoId        String   @unique @db.UniqueIdentifier
+  responsavel      String?  @db.NVarChar(160)
+  descricaoServico String?  @db.NVarChar(Max)
+  custo             Decimal? @db.Decimal(12, 2)
+  inicioEm          DateTime?
+  conclusaoEm       DateTime?
+  status            String   @default("PLANEJADA") @db.VarChar(30)
+  chamado           Chamado  @relation(fields: [chamadoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("manutencoes")
+}
+
+model Transacao {
+  id            String               @id @default(uuid()) @db.UniqueIdentifier
+  pagamentoId   String?              @db.UniqueIdentifier
+  tipo          String               @db.VarChar(20)
+  categoria     String               @db.NVarChar(80)
+  descricao     String               @db.NVarChar(255)
+  valor         Decimal              @db.Decimal(12, 2)
+  data          DateTime             @db.Date
+  criadaEm      DateTime             @default(now())
+  pagamento     Pagamento?           @relation(fields: [pagamentoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relatorios    RelatorioFinanceiro[]
+
+  @@index([tipo, data])
+  @@index([pagamentoId])
+  @@map("transacoes")
+}
+
+model RelatorioFinanceiro {
+  id            String      @id @default(uuid()) @db.UniqueIdentifier
+  inicioPeriodo DateTime    @db.Date
+  fimPeriodo    DateTime    @db.Date
+  totalReceitas Decimal     @db.Decimal(12, 2)
+  totalDespesas Decimal     @db.Decimal(12, 2)
+  saldo         Decimal     @db.Decimal(12, 2)
+  geradoEm      DateTime    @default(now())
+  transacoes    Transacao[]
+
+  @@index([inicioPeriodo, fimPeriodo])
+  @@map("relatorios_financeiros")
+}
